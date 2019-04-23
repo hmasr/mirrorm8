@@ -1,0 +1,11 @@
+import { RootState } from "~/types";
+
+const rootState = (): RootState => ({
+  weather: {
+    weeklyForecast: undefined,
+    dayForecast: undefined,
+    isLoading: false
+  }
+});
+
+export default rootState;
