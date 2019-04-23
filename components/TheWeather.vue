@@ -2,7 +2,7 @@
   <div class="the-weather">
     <div class="forecast-details">
       <div class="forecast-details__city">
-        <!-- <b>{{name}}</b> -->
+        <b>{{name}}</b>
       </div>
       <!-- <div class="forecast-description">{{weather.weather[0].main}}</div> -->
       <div class="forecast-details__temperature-value"></div>
@@ -28,22 +28,17 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import { State, Action, Getter } from "vuex-class";
+import { State, Action, Getter, namespace } from "vuex-class";
 import { WeatherState } from "~/types";
 
-// const weather = namespace("");
-const namespace: string = "weather";
+const weather = namespace("weather");
+
 @Component({})
 export default class TheWeather extends Vue {
-  @State("weather", { namespace }) weather!: WeatherState;
-  @Action("byCityName", { namespace }) byCityName;
-  // @weather.Getter("isLoading") isLoading: boolean;
-  // @weather.Getter(
-  //   (state: WeatherState): string => {
-  //     return state.currentWeather.name;
-  //   }
-  // )
-  // name: string;
+  @State weather!: WeatherState;
+  @weather.Action("byCityName") byCityName;
+  // @weather.Getter("isLoading") isLoading!: boolean;
+  @weather.Getter("name") name!: string;
 
   mounted() {
     console.log(this.byCityName.toString());

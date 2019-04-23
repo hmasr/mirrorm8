@@ -7,7 +7,7 @@ import { GetterTree } from "vuex";
 //   }
 // };
 const getters: GetterTree<WeatherState, RootState> = {
-  name(state): string {
+  name(state: WeatherState): string {
     return state.dayForecast ? state.dayForecast.name : "";
   }
 };
