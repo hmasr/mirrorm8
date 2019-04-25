@@ -21,9 +21,10 @@ function getApiUrl(type: OpenWeatherMapApiDataType) {
   );
 }
 const actions: ActionTree<WeatherState, RootState> = {
-  async byCityName({ commit }, { name, countryCode }: IByCityNameOptions) {
-    console.log("byCityName");
-    commit("setLoading", true);
+  async dayForecastbyCityName(
+    { commit },
+    { name, countryCode }: IByCityNameOptions
+  ) {
     const params = new URLSearchParams({
       q: [name, countryCode].join(),
       units: DEFAULT_UNIT
@@ -31,8 +32,20 @@ const actions: ActionTree<WeatherState, RootState> = {
     const url =
       getApiUrl(OpenWeatherMapApiDataType.Weather) + "&" + params.toString();
     const result = await axios.get(url);
-    commit("setCurrentWeather", result.data);
-    commit("setLoading", false);
+    commit("setDayForecast", result.data);
+  },
+  async weeklyForecastByCityName(
+    { commit },
+    { name, countryCode }: IByCityNameOptions
+  ) {
+    const params = new URLSearchParams({
+      q: [name, countryCode].join(),
+      units: DEFAULT_UNIT
+    });
+    const url =
+      getApiUrl(OpenWeatherMapApiDataType.Forecast) + "&" + params.toString();
+    const result = await axios.get(url);
+    commit("setWeeklyForecast", result.data);
   }
 };
 

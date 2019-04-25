@@ -1,17 +1,20 @@
-import { DayForecast, WeatherState } from "~/types";
+import {
+  WeatherState,
+  OpenWeatherMapDayForecast,
+  IOpenWeatherMapWeeklyForecast
+} from "~/types";
 import { MutationTree } from "vuex";
 
 const mutations: MutationTree<WeatherState> = {
-  setCurrentWeather(state: WeatherState, payload: DayForecast) {
-    // console.log("weather", payload);
+  setDayForecast(state: WeatherState, payload: OpenWeatherMapDayForecast) {
     state.dayForecast = payload;
-    console.log(state);
   },
-  // setCurrentForecast(state, payload) {
-  //   // state.currentForecast = payload;
-  // },
-  setLoading(state: WeatherState, payload: boolean) {
-    state.isLoading = payload;
+  setWeeklyForecast(
+    state: WeatherState,
+    payload: IOpenWeatherMapWeeklyForecast
+  ) {
+    state.weeklyForecast = payload;
+    console.log("State weeklyForecast", payload);
   }
 };
 

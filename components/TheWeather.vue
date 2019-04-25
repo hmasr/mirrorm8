@@ -1,26 +1,40 @@
 <template>
   <div class="the-weather">
-    <div class="forecast-details">
-      <div class="forecast-details__city">
-        <b>{{name}}</b>
+    <div v-if="dayForecast" class="day-forecast">
+      <div class="day-forecast__location">
+        <b>{{dayForecast.location}}</b>
       </div>
-      <!-- <div class="forecast-description">{{weather.weather[0].main}}</div> -->
-      <div class="forecast-details__temperature-value"></div>
-      <!-- {{isLoading}} -->
+      <div class="day-forecast__summary">{{dayForecast.summary}}</div>
+      <div class="columns">
+        <div class="column col-6 day-forecast__temperature">
+          <img src="https://duckduckgo.com/assets/weather/svg/new/clear-day.svg" alt="clear day">
+          {{dayForecast.temperature.temp}}°
+        </div>
+        <div class="column col-6 day-forecast__details">
+          <div class="day-forecast__humidity">Vochtigheid: {{dayForecast.temperature.humidity}}%</div>
+          <div
+            class="day-forecast__wind"
+          >Wind: {{dayForecast.wind.direction}} {{dayForecast.wind.speed}}km/h</div>
+        </div>
+      </div>
     </div>
     <!-- <div v-if="weather.isLoading">Loading...</div> -->
-    <div class="forecast columns col-gapless">
-      <div class="forecast-item column col-2">
+    <div v-if="weeklyForecast" class="forecast columns col-gapless">
+      <div
+        class="forecast-item column col-2"
+        v-for="forecast in weeklyForecast.list"
+        :key="forecast.dt"
+      >
         <div class="forecast-item__day">
-          <b>Sun</b>
+          <b>{{forecast.summary}}</b>
         </div>
         <img
           class="forecast-item__icon"
           src="https://duckduckgo.com/assets/weather/svg/new/partly-cloudy-day.svg"
           alt="Partly cloudy in the morning."
         >
-        <div class="forecast-item__temp-high">13°</div>
-        <div class="forecast-item__temp-low">0°</div>
+        <div class="forecast-item__temp">{{forecast.temperature.temp}}°</div>
+        <div class="forecast-item__temp-low">{{forecast.temperature.temp_min}}°</div>
       </div>
     </div>
   </div>
@@ -29,31 +43,46 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import { State, Action, Getter, namespace } from "vuex-class";
-import { WeatherState } from "~/types";
+import { WeatherState, DayForecast, WeeklyForecast } from "~/types";
 
 const weather = namespace("weather");
 
 @Component({})
 export default class TheWeather extends Vue {
   @State weather!: WeatherState;
-  @weather.Action("byCityName") byCityName;
-  // @weather.Getter("isLoading") isLoading!: boolean;
-  @weather.Getter("name") name!: string;
+  @weather.Action dayForecastbyCityName;
+  @weather.Action weeklyForecastByCityName;
+  @weather.Getter dayForecast!: DayForecast;
+  @weather.Getter weeklyForecast!: WeeklyForecast;
 
   mounted() {
-    console.log(this.byCityName.toString());
-    this.byCityName({ name: "veldhoven", countryCode: "nl" });
-    console.log("WeatherState", this.weather);
-    console.log("store", this.$store.state);
+    const options = {
+      name: "veldhoven",
+      countryCode: process.env.LANG
+    };
+    this.dayForecastbyCityName(options);
+    this.weeklyForecastByCityName(options);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .the-weather {
-  .forecast-details {
-    .forecast-details__city {
+  width: 400px;
+  min-width: 400px;
+  .day-forecast {
+    .day-forecast__location {
       font-size: 20px;
+    }
+    .day-forecast__summary {
+      text-transform: capitalize;
+      font-size: 1em;
+      margin: 4px 0 2px;
+      color: #d8d8d8;
+    }
+    .day-forecast__temperature {
+      font-size: 44px;
+      font-weight: 600;
     }
   }
   .forecast {
@@ -66,8 +95,17 @@ export default class TheWeather extends Vue {
         padding-top: 20px;
         line-height: 100%;
       }
-      .forecast-item__temp-high {
-        font-size: 20px;
+      .forecast-item__icon {
+        line-height: 1;
+      }
+      .forecast-item__temp {
+        font-weight: 600;
+        font-size: 18px;
+      }
+      .forecast-item__temp-low {
+        font-weight: normal;
+        font-size: 1em;
+        line-height: 100%;
       }
     }
   }
