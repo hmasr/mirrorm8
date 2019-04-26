@@ -1,0 +1,167 @@
+@font-face {
+  font-family: "MeteoconsRegular";
+  src: url("meteocons-webfont.eot");
+  src: url("meteocons-webfont.eot?#iefix") format("embedded-opentype"),
+    url("meteocons-webfont.woff") format("woff"),
+    url("meteocons-webfont.ttf") format("truetype"),
+    url("meteocons-webfont.svg#MeteoconsRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="meteo-"]:before,
+[class*=" meteo-"]:before {
+  font-family: "MeteoconsRegular";
+  font-style: normal;
+  font-weight: normal;
+
+  display: inline-block;
+  text-decoration: inherit;
+  margin: 0 0.2em;
+  text-align: center;
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* you can be more comfortable with increased icons size */
+  font-size: 2.4rem;
+}
+.meteo-windy-rain-inv:before {
+  content: "\21";
+} /* '!' */
+.meteo-snow-inv:before {
+  content: "\22";
+} /* '&quot;' */
+.meteo-snow-heavy-inv:before {
+  content: "\23";
+} /* '#' */
+.meteo-hail-inv:before {
+  content: "\24";
+} /* '$' */
+.meteo-clouds-inv:before {
+  content: "\25";
+} /* '%' */
+.meteo-clouds-flash-inv:before {
+  content: "\26";
+} /* '&amp;' */
+.meteo-temperature:before {
+  content: "\27";
+} /* ''' */
+.meteo-compass:before {
+  content: "\28";
+} /* '(' */
+.meteo-na:before {
+  content: "\29";
+} /* ')' */
+.meteo-celcius:before {
+  content: "\2a";
+} /* '*' */
+.meteo-fahrenheit:before {
+  content: "\2b";
+} /* '+' */
+.meteo-clouds-flash-alt:before {
+  content: "\30";
+} /* '0' */
+.meteo-sun-inv:before {
+  content: "\31";
+} /* '1' */
+.meteo-moon-inv:before {
+  content: "\32";
+} /* '2' */
+.meteo-cloud-sun-inv:before {
+  content: "\33";
+} /* '3' */
+.meteo-cloud-moon-inv:before {
+  content: "\34";
+} /* '4' */
+.meteo-cloud-inv:before {
+  content: "\35";
+} /* '5' */
+.meteo-cloud-flash-inv:before {
+  content: "\36";
+} /* '6' */
+.meteo-drizzle-inv:before {
+  content: "\37";
+} /* '7' */
+.meteo-rain-inv:before {
+  content: "\38";
+} /* '8' */
+.meteo-windy-inv:before {
+  content: "\39";
+} /* '9' */
+.meteo-sunrise:before {
+  content: "\41";
+} /* 'A' */
+.meteo-sun:before {
+  content: "\42";
+} /* 'B' */
+.meteo-moon:before {
+  content: "\43";
+} /* 'C' */
+.meteo-eclipse:before {
+  content: "\44";
+} /* 'D' */
+.meteo-mist:before {
+  content: "\45";
+} /* 'E' */
+.meteo-wind:before {
+  content: "\46";
+} /* 'F' */
+.meteo-snowflake:before {
+  content: "\47";
+} /* 'G' */
+.meteo-cloud-sun:before {
+  content: "\48";
+} /* 'H' */
+.meteo-cloud-moon:before {
+  content: "\49";
+} /* 'I' */
+.meteo-fog-sun:before {
+  content: "\4a";
+} /* 'J' */
+.meteo-fog-moon:before {
+  content: "\4b";
+} /* 'K' */
+.meteo-fog-cloud:before {
+  content: "\4c";
+} /* 'L' */
+.meteo-fog:before {
+  content: "\4d";
+} /* 'M' */
+.meteo-cloud:before {
+  content: "\4e";
+} /* 'N' */
+.meteo-cloud-flash:before {
+  content: "\4f";
+} /* 'O' */
+.meteo-cloud-flash-alt:before {
+  content: "\50";
+} /* 'P' */
+.meteo-drizzle:before {
+  content: "\51";
+} /* 'Q' */
+.meteo-rain:before {
+  content: "\52";
+} /* 'R' */
+.meteo-windy:before {
+  content: "\53";
+} /* 'S' */
+.meteo-windy-rain:before {
+  content: "\54";
+} /* 'T' */
+.meteo-snow:before {
+  content: "\55";
+} /* 'U' */
+.meteo-snow-alt:before {
+  content: "\56";
+} /* 'V' */
+.meteo-snow-heavy:before {
+  content: "\57";
+} /* 'W' */
+.meteo-hail:before {
+  content: "\58";
+} /* 'X' */
+.meteo-clouds:before {
+  content: "\59";
+} /* 'Y' */
