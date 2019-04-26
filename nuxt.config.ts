@@ -18,11 +18,7 @@ const config: NuxtConfiguration = {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   loading: { color: "#3B8070" },
-  css: [
-    "~/assets/css/main.css",
-    "spectre.css",
-    "~/assets/fonts/meteocons/meteocons.css"
-  ],
+  css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
   build: {},
   modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
   axios: {}
