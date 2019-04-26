@@ -1,17 +1,26 @@
 <template>
-  <section>
-    <TheWeather/>
-  </section>
+  <div class="columns">
+    <div class="column col-6">
+      <TheTime/>
+    </div>
+    <div class="column col-6">
+      <div class="float-right">
+        <TheWeather/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import { State } from "vuex-class";
 import TheWeather from "~/components/TheWeather.vue";
+import TheTime from "~/components/TheTime.vue";
 
 @Component({
   components: {
-    TheWeather
+    TheWeather,
+    TheTime
   }
 })
 export default class extends Vue {
