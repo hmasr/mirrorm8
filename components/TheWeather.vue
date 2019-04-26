@@ -4,21 +4,27 @@
       <div class="day-forecast__location">
         <b>{{dayForecast.location}}</b>
       </div>
-      <div class="day-forecast__summary">{{dayForecast.summary}}</div>
-      <div class="columns flex-centered">
-        <div class="column col-6 day-forecast__temperature">
+      <div class="columns col-gapless">
+        <div class="column col-4 day-forecast__temperature">
           <i :class="dayForecast.icon"/>
           {{dayForecast.temperature.temp}}°
         </div>
-        <div class="column col-6 day-forecast__details">
-          <div class="day-forecast__humidity">Vochtigheid: {{dayForecast.temperature.humidity}}%</div>
-          <div
-            class="day-forecast__wind"
-          >Wind: {{dayForecast.wind.direction}} {{dayForecast.wind.speed}}km/h</div>
+        <div class="column col-6 day-forecast__wind">
+          <div class="d-inline-block">
+            <i class="meteo-wind"/>
+          </div>
+          <div class="d-inline-block">
+            {{dayForecast.wind.direction}}
+            <br>
+            {{dayForecast.wind.speed}}km/h
+          </div>
         </div>
+        <!-- <div class="column col-6 day-forecast__details">
+          <div class="day-forecast__humidity">Vochtigheid: {{dayForecast.temperature.humidity}}%</div>
+        </div>-->
       </div>
     </div>
-    <!-- <div v-if="weather.isLoading">Loading...</div> -->
+
     <div v-if="weeklyForecast" class="forecast columns col-gapless">
       <div
         class="forecast-item column col-2"
@@ -28,7 +34,7 @@
         <div class="forecast-item__day">
           <b>{{forecast.summary}}</b>
         </div>
-        <i :class="forecast.icon"/>
+        <i :class="forecast.icon" class="forecast-item__icon"/>
         <div class="forecast-item__temp">{{forecast.temperature.temp}}°</div>
         <div class="forecast-item__temp-low">{{forecast.temperature.temp_min}}°</div>
       </div>
@@ -64,21 +70,21 @@ export default class TheWeather extends Vue {
 
 <style lang="scss" scoped>
 .the-weather {
-  width: 400px;
-  min-width: 400px;
+  width: 420px;
+  min-width: 420px;
   .day-forecast {
     .day-forecast__location {
-      font-size: 20px;
-    }
-    .day-forecast__summary {
-      text-transform: capitalize;
-      font-size: 1em;
-      margin: 4px 0 2px;
-      color: #d8d8d8;
+      font-size: 14px;
+      margin-top: 8px;
     }
     .day-forecast__temperature {
       font-size: 44px;
       font-weight: 600;
+      line-height: 1;
+    }
+    .day-forecast__wind {
+      display: inline-block;
+      line-height: 1;
     }
   }
   .forecast {
@@ -88,11 +94,11 @@ export default class TheWeather extends Vue {
 
       .forecast-item__day {
         text-transform: capitalize;
-        padding-top: 20px;
+        padding-top: 12px;
         line-height: 100%;
       }
-      .forecast-item__icon {
-        line-height: 1;
+      .forecast-item__icon:before {
+        font-size: 32px;
       }
       .forecast-item__temp {
         font-weight: 600;
