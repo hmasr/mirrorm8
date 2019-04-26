@@ -14,7 +14,6 @@ const mutations: MutationTree<WeatherState> = {
     payload: IOpenWeatherMapWeeklyForecast
   ) {
     state.weeklyForecast = payload;
-    console.log("State weeklyForecast", payload);
   }
 };
 

@@ -8,7 +8,7 @@ import {
   OpenWeatherMapDayForecast
 } from "~/types";
 import { GetterTree } from "vuex";
-import { stringify } from "querystring";
+import { getIcon, OpenWeatherMapIcon } from "~/plugins/meteocons-map";
 
 const angles: Array<WindDirection> = [
   "N",
@@ -40,6 +40,7 @@ function ToDayForecast(dayForecast: OpenWeatherMapDayForecast): DayForecast {
     date: date,
     dt: dayForecast.dt * 1000,
     location: `${dayForecast.name}, ${dayForecast.sys.country}`,
+    icon: getIcon(dayForecast.weather[0].icon as OpenWeatherMapIcon),
     temperature: {
       temp: Math.round(dayForecast.main.temp),
       temp_min: Math.round(dayForecast.main.temp_min),
@@ -98,19 +99,19 @@ const getters: GetterTree<WeatherState, RootState> = {
 
       dailyMap.get(i)!.push(forecast);
     }
-    console.log(dailyMap);
+
     for (const value of dailyMap.values()) {
       const fromDate: Date = new Date(value[0].dt);
       const toDate: Date = new Date(value[0].dt);
 
       fromDate.setHours(12);
       toDate.setHours(14);
-      let dayForecast =
+      const dayForecast =
         value.filter(
           o =>
             o.date.getTime() >= fromDate.getTime() &&
             o.date.getTime() <= toDate.getTime()
-        )[0] || value[value.length - 1];
+        )[0] || value[0];
 
       let dayTempMin: number = 0;
       let dayTempAvg: number = 0;
@@ -127,7 +128,6 @@ const getters: GetterTree<WeatherState, RootState> = {
       list.push(dayForecast);
     }
 
-    console.log(list);
     return {
       list
     } as WeeklyForecast;

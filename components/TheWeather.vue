@@ -7,7 +7,7 @@
       <div class="day-forecast__summary">{{dayForecast.summary}}</div>
       <div class="columns">
         <div class="column col-6 day-forecast__temperature">
-          <img src="https://duckduckgo.com/assets/weather/svg/new/clear-day.svg" alt="clear day">
+          <i :class="dayForecast.icon"/>
           {{dayForecast.temperature.temp}}°
         </div>
         <div class="column col-6 day-forecast__details">
@@ -28,11 +28,7 @@
         <div class="forecast-item__day">
           <b>{{forecast.summary}}</b>
         </div>
-        <img
-          class="forecast-item__icon"
-          src="https://duckduckgo.com/assets/weather/svg/new/partly-cloudy-day.svg"
-          alt="Partly cloudy in the morning."
-        >
+        <i :class="forecast.icon"/>
         <div class="forecast-item__temp">{{forecast.temperature.temp}}°</div>
         <div class="forecast-item__temp-low">{{forecast.temperature.temp_min}}°</div>
       </div>

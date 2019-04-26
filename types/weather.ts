@@ -33,6 +33,7 @@ export interface DayForecast {
   dt: number;
   date: Date;
   temperature: WeatherTemperature;
+  icon: string;
   wind: {
     direction: WindDirection;
     speed: number;

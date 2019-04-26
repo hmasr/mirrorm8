@@ -12,7 +12,6 @@ const DEFAULT_API_VERSION = "2.5";
 const DEFAULT_UNIT = "metric";
 
 function getApiUrl(type: OpenWeatherMapApiDataType) {
-  console.log(process.env.KEY_OPENWEATHERMAPAPI);
   return new URL(
     `data/${DEFAULT_API_VERSION}/${type}?APPID=${
       process.env.KEY_OPENWEATHERMAPAPI
