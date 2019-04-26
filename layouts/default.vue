@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <nuxt/>
   </div>
 </template>
@@ -9,5 +9,8 @@
 body {
   background-color: #252525;
   color: #fafafa;
+}
+.main {
+  padding: 2rem;
 }
 </style>
