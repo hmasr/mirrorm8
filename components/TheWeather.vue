@@ -5,7 +5,7 @@
         <b>{{dayForecast.location}}</b>
       </div>
       <div class="day-forecast__summary">{{dayForecast.summary}}</div>
-      <div class="columns">
+      <div class="columns flex-centered">
         <div class="column col-6 day-forecast__temperature">
           <i :class="dayForecast.icon"/>
           {{dayForecast.temperature.temp}}°
