@@ -2,6 +2,7 @@
   <div class="columns">
     <div class="column col-6">
       <TheTime/>
+      <TheEvents/>
     </div>
     <div class="column col-6">
       <div class="float-right">
@@ -16,11 +17,13 @@ import { Component, Vue } from "nuxt-property-decorator";
 import { State } from "vuex-class";
 import TheWeather from "~/components/TheWeather.vue";
 import TheTime from "~/components/TheTime.vue";
+import TheEvents from "~/components/TheEvents.vue";
 
 @Component({
   components: {
     TheWeather,
-    TheTime
+    TheTime,
+    TheEvents
   }
 })
 export default class extends Vue {

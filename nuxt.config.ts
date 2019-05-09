@@ -18,6 +18,12 @@ const config: NuxtConfiguration = {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   loading: { color: "#3B8070" },
+  plugins: [
+    {
+      src: "~/plugins/gapi.client.ts",
+      ssr: false
+    }
+  ],
   css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
   build: {},
   modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],

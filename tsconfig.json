@@ -16,6 +16,12 @@
       "~/*": ["./*"],
       "@/*": ["./*"]
     },
-    "types": ["@types/node", "@types/webpack-env"]
+    "types": [
+      "@types/node",
+      "@types/webpack-env",
+      "@types/gapi",
+      "@types/gapi.auth2",
+      "@types/gapi.client.calendar"
+    ]
   }
 }
