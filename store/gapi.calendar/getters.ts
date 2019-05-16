@@ -1,5 +1,5 @@
-import { RootState, GapiEventsState, GapiEvent } from "~/types";
-
+import { RootState } from "~/types";
+import { GapiEventsState, GapiEvent } from "~/types/gapi.calendar";
 import { GetterTree } from "vuex";
 
 const getters: GetterTree<GapiEventsState, RootState> = {

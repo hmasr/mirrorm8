@@ -56,6 +56,7 @@ export default class TheTime extends Vue {
 .the-time {
   .time {
     font-size: 3em;
+    line-height: 1;
   }
   .date {
     font-size: 2em;

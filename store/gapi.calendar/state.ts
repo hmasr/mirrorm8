@@ -1,4 +1,4 @@
-import { GapiEventsState } from "~/types";
+import { GapiEventsState } from "~/types/gapi.calendar";
 
 const state = (): GapiEventsState => ({
   events: []

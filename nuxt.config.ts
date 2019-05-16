@@ -20,7 +20,7 @@ const config: NuxtConfiguration = {
   loading: { color: "#3B8070" },
   plugins: [
     {
-      src: "~/plugins/gapi.client.ts",
+      src: "~/plugins/vue-gapi.client.ts",
       ssr: false
     }
   ],

@@ -1,8 +1,14 @@
 <template>
   <div class="columns">
     <div class="column col-6">
-      <TheTime/>
-      <TheEvents/>
+      <div class="v-columns">
+        <div class="column">
+          <TheTime/>
+        </div>
+        <div class="column">
+          <TheEvents/>
+        </div>
+      </div>
     </div>
     <div class="column col-6">
       <div class="float-right">
@@ -31,13 +37,27 @@ export default class extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .header {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
-.cards {
+.d-table {
+  display: table;
+}
+.d-table-cell {
+  display: table-cell;
+}
+.v-columns {
   display: flex;
-  flex-wrap: wrap;
+  align-content: stretch;
+  flex-direction: column;
+  height: 100%;
+
+  .column {
+    padding: 1rem;
+    &:first-child {
+      padding-top: 0;
+    }
+  }
 }
 </style>
