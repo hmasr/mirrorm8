@@ -1,0 +1,11 @@
+version: "2.1"
+
+services:
+  mirrorm8:
+    image: mirrorm8
+    build: .
+    environment:
+      NODE_ENV: production
+    env_file: .env
+    ports:
+      - 3000:3000
