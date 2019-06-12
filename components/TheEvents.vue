@@ -46,7 +46,6 @@ export default class TheEvents extends Vue {
       hour: format,
       minute: format
     });
-    // return this.format(date, { hour: format, minute: format });
   }
 
   getWeekDay(date: Date, format = "short"): string {
