@@ -1,9 +1,11 @@
 <template>
   <div class="the-events">
-    <div class="event" v-for="event in eventList" :key="event.id">
+    <div class="event" v-for="(event,key) of eventList" :key="event.id">
       <div class="event__date">
-        <div class="day-name">{{getWeekDay(event.date.start)}}</div>
-        <div class>{{getDay(event.date.start)}}</div>
+        <div v-if="key ==0 || !isSameDay(event.date.start, eventList[key-1].date.start)">
+          <div class="day-name">{{getWeekDay(event.date.start)}}</div>
+          <div class>{{getDay(event.date.start)}}</div>
+        </div>
       </div>
       <div class="event__description">
         <div class="summary">{{event.summary}}</div>
@@ -27,10 +29,20 @@ export default class TheEvents extends Vue {
   @events.Getter eventList;
 
   async mounted() {
-    console.log("$gapi", this.$gapi);
     await this.$gapi.initialize();
     await this.$gapi.authenticate();
     this.getEvents();
+  }
+
+  isSameDay(d1: Date, d2: Date): boolean {
+    if (!d1 || !d2) {
+      return false;
+    }
+    const result =
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate();
+    return result;
   }
 
   methods() {
@@ -66,7 +78,6 @@ export default class TheEvents extends Vue {
 
 <style lang="scss" scoped>
 .the-events {
-  // border: 1px solid white;
   .event {
     display: flex;
     flex-direction: row;
@@ -77,6 +88,7 @@ export default class TheEvents extends Vue {
       font-size: 1.8rem;
       text-transform: capitalize;
       padding: 0 0.5em 0 0;
+      min-width: 70px;
     }
 
     .event__description {

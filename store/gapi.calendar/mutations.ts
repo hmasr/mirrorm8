@@ -1,4 +1,4 @@
-import { GapiEventsState, GapiEvent, GoogleEvent } from "~/types/gapi.calendar";
+import { GapiEventsState, GapiEvent } from "~/types/gapi.calendar";
 import { MutationTree } from "vuex";
 
 const mutations: MutationTree<GapiEventsState> = {
