@@ -21,7 +21,7 @@
       "@types/webpack-env",
       "@types/gapi",
       "@types/gapi.auth2",
-      "@types/gapi.client.calendar"
+      "./types/gapi.client.calendar"
     ]
   }
 }

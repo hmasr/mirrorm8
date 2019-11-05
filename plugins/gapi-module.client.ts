@@ -56,7 +56,7 @@ export default class Gapi implements IGapi {
     });
   }
 
-  public authenticate(): Promise<gapi.auth2.GoogleAuth> {
+  public authenticate(): Promise<void> {
     return new Promise((resolve, reject) => {
       // if (localStorage.getItem("gapi-oauth2-token")) {
       // }

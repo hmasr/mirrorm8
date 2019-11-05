@@ -8,5 +8,5 @@ export interface IGapiModule {
 
 export interface IGapi {
   initialize(): Promise<void>;
-  authenticate(): Promise<gapi.auth2.GoogleAuth>;
+  authenticate(): Promise<void>;
 }

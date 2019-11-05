@@ -12,9 +12,15 @@ export default class GapiCalendar implements IGapiCalendar {
         timeMin: new Date().toISOString(),
         maxResults: 5
       };
-      const { result } = await gapi.client.calendar.events.list(options);
-      if (result.error) {
-        throw new Error(result.error);
+
+      const {
+        result,
+        status,
+        statusText
+      } = await gapi.client.calendar.events.list(options);
+
+      if (status != 200) {
+        throw new Error(statusText);
       }
 
       return result.items as GapiEvents;

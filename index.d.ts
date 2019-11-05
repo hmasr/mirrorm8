@@ -7,7 +7,7 @@ declare module "*.vue" {
   export default _default;
 }
 
-declare module "*.vue" {
+declare module "vue/types/vue" {
   interface Vue {
     $gapi: IGapi;
   }
