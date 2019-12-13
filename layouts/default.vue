@@ -1,13 +1,13 @@
 <template>
   <div class="main">
-    <nuxt/>
+    <nuxt />
   </div>
 </template>
 
 <style>
 .html,
 body {
-  background-color: #252525;
+  background-color: black;
   color: #fafafa;
 }
 .main {
