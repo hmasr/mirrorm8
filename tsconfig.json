@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["esnext", "esnext.asynciterable", "dom"],
@@ -17,11 +17,14 @@
       "@/*": ["./*"]
     },
     "types": [
+      "@nuxt/types",
       "@types/node",
       "@types/webpack-env",
       "@types/gapi",
       "@types/gapi.auth2",
-      "./types/gapi.client.calendar"
+      "./types/gapi.client.calendar",
+      "./types/gapi.client"
     ]
-  }
+  },
+  "exclude": ["node_modules"]
 }

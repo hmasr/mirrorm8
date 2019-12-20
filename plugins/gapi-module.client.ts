@@ -58,6 +58,15 @@ export default class Gapi implements IGapi {
 
   public authenticate(): Promise<void> {
     return new Promise((resolve, reject) => {
+      if (
+        !process.env.GAPI_OAUTH2_CLIENT_ID ||
+        !process.env.GAPI_OAUTH2_CLIENT_ID.length
+      ) {
+        reject(
+          new Error("Undefined environment variable 'GAPI_OAUTH2_CLIENT_ID'")
+        );
+      }
+
       // if (localStorage.getItem("gapi-oauth2-token")) {
       // }
 

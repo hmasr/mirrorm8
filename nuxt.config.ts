@@ -1,6 +1,4 @@
-import NuxtConfiguration from "@nuxt/config";
-
-const config: NuxtConfiguration = {
+export default {
   env: {
     KEY_OPENWEATHERMAPAPI: process.env.KEY_OPENWEATHERMAPAPI as string
   },
@@ -25,9 +23,8 @@ const config: NuxtConfiguration = {
     }
   ],
   css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
+  buildModules: ["@nuxt/typescript-build"],
   build: {},
   modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
   axios: {}
 };
-
-export default config;
