@@ -67,13 +67,3 @@ export interface IOpenWeatherMapWeeklyForecast {
 export interface WeeklyForecast {
   list: Array<DayForecast>;
 }
-
-export enum OpenWeatherMapApiDataType {
-  Weather = "weather",
-  Forecast = "forecast"
-}
-
-export interface IByCityNameOptions {
-  name: string;
-  countryCode?: string;
-}

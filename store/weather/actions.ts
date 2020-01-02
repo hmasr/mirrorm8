@@ -1,50 +1,44 @@
 import { ActionTree } from "vuex";
 import {
-  WeatherState,
-  RootState,
-  IByCityNameOptions,
-  OpenWeatherMapApiDataType
-} from "~/types";
-import axios from "axios";
+  OpenWeatherMapApi,
+  OpenWeatherMapApiUnits,
+  IByCityNameOptions
+} from "node-ts-open-weather-map";
+import { WeatherState, RootState } from "~/types";
 
-const BASE_URL = "https://api.openweathermap.org/";
-const DEFAULT_API_VERSION = "2.5";
-const DEFAULT_UNIT = "metric";
-
-function getApiUrl(type: OpenWeatherMapApiDataType) {
-  return new URL(
-    `data/${DEFAULT_API_VERSION}/${type}?APPID=${
-      process.env.KEY_OPENWEATHERMAPAPI
-    }`,
-    BASE_URL
-  );
+if (
+  !process.env.KEY_OPENWEATHERMAPAPI ||
+  !process.env.KEY_OPENWEATHERMAPAPI.length
+) {
+  throw new Error("Undefined environment variable 'KEY_OPENWEATHERMAPAPI'");
 }
+
+const openWeatherMapApi = new OpenWeatherMapApi({
+  key: process.env.KEY_OPENWEATHERMAPAPI,
+  temperatureUnit: OpenWeatherMapApiUnits.Celsius
+});
+
 const actions: ActionTree<WeatherState, RootState> = {
   async dayForecastbyCityName(
     { commit },
     { name, countryCode }: IByCityNameOptions
   ) {
-    const params = new URLSearchParams({
-      q: [name, countryCode].join(),
-      units: DEFAULT_UNIT
+    const data = await openWeatherMapApi.byCityName({
+      name,
+      countryCode
     });
-    const url =
-      getApiUrl(OpenWeatherMapApiDataType.Weather) + "&" + params.toString();
-    const result = await axios.get(url);
-    commit("setDayForecast", result.data);
+
+    commit("setDayForecast", data);
   },
   async weeklyForecastByCityName(
     { commit },
     { name, countryCode }: IByCityNameOptions
   ) {
-    const params = new URLSearchParams({
-      q: [name, countryCode].join(),
-      units: DEFAULT_UNIT
+    const data = await openWeatherMapApi.forecastByCityName({
+      name,
+      countryCode
     });
-    const url =
-      getApiUrl(OpenWeatherMapApiDataType.Forecast) + "&" + params.toString();
-    const result = await axios.get(url);
-    commit("setWeeklyForecast", result.data);
+    commit("setWeeklyForecast", data);
   }
 };
 
