@@ -1,3 +1,6 @@
+# Nuxt.js
+.nuxt/
+
 # Logs
 logs
 *.log
