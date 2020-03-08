@@ -1,7 +1,6 @@
-export default {
-  env: {
-    KEY_OPENWEATHERMAPAPI: process.env.KEY_OPENWEATHERMAPAPI as string
-  },
+import { Configuration } from "@nuxt/types";
+
+const config: Configuration = {
   head: {
     title: "mirrorm8",
     meta: [
@@ -23,8 +22,38 @@ export default {
     }
   ],
   css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
+  watch: ["~/server/**/*.ts"],
   buildModules: ["@nuxt/typescript-build"],
-  build: {},
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv"],
-  axios: {}
+  build: {
+    extend(config: any, ctx: any) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
+      }
+    }
+  },
+  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-socket-io"],
+  serverMiddleware: ["~/server"],
+  io: {
+    sockets: [
+      {
+        name: "proximity",
+        url: "http://localhost:3000",
+        default: true,
+        transports: ["websocket"],
+        vuex: {
+          mutations: [{ proximity: "proximity/setIsSignalEnabled" }]
+        },
+        namespaces: {
+          "/proximity": {
+            listeners: ["proximity"]
+          }
+        }
+      }
+    ]
+  },
+  axios: {
+    baseURL: "http://localhost:3000"
+  }
 };
+
+export default config;
