@@ -2,21 +2,21 @@
   <div class="the-weather">
     <div v-if="dayForecast" class="day-forecast">
       <div class="day-forecast__location">
-        <b>{{dayForecast.location}}</b>
+        <b>{{ dayForecast.location }}</b>
       </div>
       <div class="columns col-gapless">
         <div class="column col-4 day-forecast__temperature">
-          <i :class="dayForecast.icon"/>
-          {{dayForecast.temperature.temp}}°
+          <i :class="dayForecast.icon" />
+          {{ dayForecast.temperature.temp }}°
         </div>
         <div class="column col-6 day-forecast__wind">
           <div class="d-inline-block">
-            <i class="meteo-wind"/>
+            <i class="meteo-wind" />
           </div>
           <div class="d-inline-block">
-            {{dayForecast.wind.direction}}
-            <br>
-            {{dayForecast.wind.speed}}km/h
+            {{ dayForecast.wind.direction }}
+            <br />
+            {{ dayForecast.wind.speed }}km/h
           </div>
         </div>
         <!-- <div class="column col-6 day-forecast__details">
@@ -32,11 +32,13 @@
         :key="forecast.dt"
       >
         <div class="forecast-item__day">
-          <b>{{forecast.summary}}</b>
+          <b>{{ forecast.summary }}</b>
         </div>
-        <i :class="forecast.icon" class="forecast-item__icon"/>
-        <div class="forecast-item__temp">{{forecast.temperature.temp}}°</div>
-        <div class="forecast-item__temp-low">{{forecast.temperature.temp_min}}°</div>
+        <i :class="forecast.icon" class="forecast-item__icon" />
+        <div class="forecast-item__temp">{{ forecast.temperature.temp }}°</div>
+        <div class="forecast-item__temp-low">
+          {{ forecast.temperature.temp_min }}°
+        </div>
       </div>
     </div>
   </div>
@@ -44,14 +46,14 @@
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import { State, Action, Getter, namespace } from "vuex-class";
+import { namespace } from "vuex-class";
 import { WeatherState, DayForecast, WeeklyForecast } from "~/types";
 
 const weather = namespace("weather");
 
 @Component({})
 export default class TheWeather extends Vue {
-  @State weather!: WeatherState;
+  @weather.State weather!: WeatherState;
   @weather.Action dayForecastbyCityName;
   @weather.Action weeklyForecastByCityName;
   @weather.Getter dayForecast!: DayForecast;

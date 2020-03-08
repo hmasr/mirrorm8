@@ -9,7 +9,7 @@
 // In case of any problems please post issue to https://github.com/Bolisov/google-api-typings-generator
 // Generated from: https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
 
-/// <reference types="gapi.client" />
+/// <reference path="gapi.client/index.d.ts" />
 
 declare namespace gapi.client {
   /** Load Calendar API v3 */

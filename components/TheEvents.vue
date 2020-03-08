@@ -1,15 +1,22 @@
 <template>
   <div class="the-events">
-    <div class="event" v-for="(event,key) of eventList" :key="event.id">
+    <div class="event" v-for="(event, key) of eventList" :key="event.id">
       <div class="event__date">
-        <div v-if="key ==0 || !isSameDay(event.date.start, eventList[key-1].date.start)">
-          <div class="day-name">{{getWeekDay(event.date.start)}}</div>
-          <div class>{{getDay(event.date.start)}}</div>
+        <div
+          v-if="
+            key == 0 ||
+              !isSameDay(event.date.start, eventList[key - 1].date.start)
+          "
+        >
+          <div class="day-name">{{ getWeekDay(event.date.start) }}</div>
+          <div class>{{ getDay(event.date.start) }}</div>
         </div>
       </div>
       <div class="event__description">
-        <div class="summary">{{event.summary}}</div>
-        <div class="time">{{getTime(event.date.start)}} - {{getTime(event.date.end)}}</div>
+        <div class="summary">{{ event.summary }}</div>
+        <div class="time">
+          {{ getTime(event.date.start) }} - {{ getTime(event.date.end) }}
+        </div>
       </div>
     </div>
   </div>
@@ -17,14 +24,14 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "nuxt-property-decorator";
-import { State, Action, Getter, namespace } from "vuex-class";
+import { namespace } from "vuex-class";
 import { GapiEventsState } from "~/types/gapi.calendar";
 
 const events = namespace("gapi.calendar");
 
 @Component({})
 export default class TheEvents extends Vue {
-  @State("gapi.calendar") state!: GapiEventsState;
+  @events.State state!: GapiEventsState;
   @events.Action getEvents;
   @events.Getter eventList;
 
