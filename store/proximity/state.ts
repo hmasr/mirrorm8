@@ -1,8 +1,7 @@
 import { ProximityState } from "~/types";
 
 const state = (): ProximityState => ({
-  isSignalEnabled: false,
-  socket: undefined
+  isSignalEnabled: false
 });
 
 export default state;
