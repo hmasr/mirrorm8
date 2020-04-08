@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 import {
   OpenWeatherMapApi,
