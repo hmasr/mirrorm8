@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "nuxt-property-decorator";
+import { mapState } from "vuex";
 import { namespace } from "vuex-class";
 import { ProximityState } from "~/types/proximity";
 import socket from "socket.io";
@@ -38,9 +39,9 @@ export default class TheProximity extends Vue {
     this.socket.on("connect", () => {
       console.log("WS proximity connected");
     });
-    this.socket.on("/proximity", ({ sender, event, payload }) => {
-      console.log("WS proximity", payload);
-    });
+    // this.socket.on("change", ({ sender, event, payload }) => {
+    //   console.log("WS proximity");
+    // });
   }
 }
 </script>

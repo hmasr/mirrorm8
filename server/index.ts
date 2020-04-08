@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import helmet from "helmet";
 import express from "express";
-// import io from "./io";
+import SocketIoNamespaces from "./io";
 import SocketIO from "socket.io";
 import consola from "consola";
 import { Nuxt, Builder } from "nuxt";
@@ -15,11 +15,11 @@ const app = express();
 const server: Server = createServer(app);
 const io: SocketIO.Server = SocketIO(server);
 
-const host: string = "0.0.0.0";
 const port = process.env.PORT || 3000;
 const isProd: boolean = process.env.NODE_ENV === "production";
 config.dev = !isProd;
 
+// Load api routes
 import routes from "./api";
 app.use("/api", routes);
 
@@ -39,7 +39,6 @@ app.use("/api", routes);
   app.use(bodyParser.json());
   app.use(helmet());
 
-  // Load api routes
   server
     .listen(port)
     .on("error", error => {
@@ -49,19 +48,5 @@ app.use("/api", routes);
       consola.info("Server listening");
     });
 
-  console.log("starting ws on " + host + ":" + port, server.listening);
-  const namespace = io.of("/proximity");
-  namespace.on("connection", (socket: SocketIO.Socket) => {
-    consola.info("Socket.IO connected to /proximity");
-    socket.on("proximity", (message: string, cb: Function) => {
-      consola.info(message);
-      socket.emit("proximity", { test: true });
-
-      cb();
-    });
-
-    socket.on("disconnect", () => {
-      consola.info("client disconnected from /proximity");
-    });
-  });
+  SocketIoNamespaces(io);
 })();

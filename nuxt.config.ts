@@ -41,11 +41,11 @@ const config: Configuration = {
         default: true,
         transports: ["websocket"],
         vuex: {
-          mutations: [{ proximity: "proximity/setIsSignalEnabled" }]
+          mutations: [{ change: "proximity/setIsSignalEnabled" }]
         },
         namespaces: {
           "/proximity": {
-            listeners: ["proximity"]
+            listeners: ["change"]
           }
         }
       }
