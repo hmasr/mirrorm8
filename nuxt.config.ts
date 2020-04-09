@@ -2,7 +2,7 @@ import { Configuration } from "@nuxt/types";
 
 const config: Configuration = {
   server: {
-    host: "::",
+    host: "0.0.0.0",
     port: 8000
   },
   head: {
