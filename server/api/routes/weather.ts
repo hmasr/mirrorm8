@@ -2,7 +2,8 @@ import { Router, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 import {
   OpenWeatherMapApi,
-  OpenWeatherMapApiUnits
+  OpenWeatherMapApiUnits,
+  IByCityNameOptions
 } from "node-ts-open-weather-map";
 
 const router: Router = Router();
@@ -39,7 +40,7 @@ router.get(
       const data = await openWeatherMapApi.byCityName({
         name,
         countryCode
-      });
+      } as IByCityNameOptions);
       return res.status(200).json(data);
     } catch (error) {
       return res.status(500).json(error);
@@ -63,7 +64,7 @@ router.get(
       const data = await openWeatherMapApi.forecastByCityName({
         name,
         countryCode
-      });
+      } as IByCityNameOptions);
 
       return res.json(data);
     } catch (error) {
