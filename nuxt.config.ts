@@ -44,9 +44,7 @@ const config: Configuration = {
           mutations: [{ change: "proximity/setIsSignalEnabled" }]
         },
         namespaces: {
-          "/proximity": {
-            listeners: ["change"]
-          }
+          "/proximity": {}
         }
       }
     ]
