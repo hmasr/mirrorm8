@@ -2,7 +2,7 @@ import { Configuration } from "@nuxt/types";
 
 const config: Configuration = {
   server: {
-    host: "0.0.0.0",
+    host: "::",
     port: 8000
   },
   head: {
@@ -35,7 +35,12 @@ const config: Configuration = {
       }
     }
   },
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-socket-io"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv",
+    "nuxt-socket-io",
+    ["@nuxtjs/proxy", { pathRewrite: { "^/api": "/api/v1" } }]
+  ],
   serverMiddleware: ["~/server"],
   io: {
     sockets: [
