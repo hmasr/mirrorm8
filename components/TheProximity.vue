@@ -28,8 +28,6 @@ export default class TheProximity extends Vue {
   // }
 
   mounted() {
-    console.log(this.state);
-    console.log(this.isSignalEnabled);
     this.socket = this.$nuxtSocket({
       // name: "proximity",
       channel: "/proximity",
