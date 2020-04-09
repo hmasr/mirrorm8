@@ -2,16 +2,15 @@ import SocketIO from "socket.io";
 import { SignalProximity } from "node-pi-proximity";
 import { Gpio } from "onoff";
 import { execSync } from "child_process";
-import consola from "consola";
 
 export default (io: SocketIO.Server) => {
   const of = io.of("/proximity");
 
   of.on("connection", (socket: SocketIO.Socket) => {
-    consola.info("Socket.IO connected to /proximity");
+    console.info("Socket.IO connected to /proximity");
 
     socket.on("disconnect", () => {
-      consola.info("client disconnected from /proximity");
+      console.info("client disconnected from /proximity");
     });
   });
 
@@ -19,7 +18,6 @@ export default (io: SocketIO.Server) => {
     let state: boolean = false;
     setInterval(() => {
       state = !state;
-      consola.info("Emit change");
       of.emit("change", state);
     }, 1000);
   } else {
