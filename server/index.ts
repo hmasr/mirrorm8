@@ -24,7 +24,7 @@ import routes from "./api";
 app.use("/api", routes);
 
 // We instantiate Nuxt.js with the options
-(async () => {
+async function start() {
   const nuxt = new Nuxt(config);
   await nuxt.ready();
 
@@ -49,4 +49,8 @@ app.use("/api", routes);
     });
 
   SocketIoNamespaces(io);
-})();
+}
+
+if (require.main === module) {
+  start();
+}
