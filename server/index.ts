@@ -15,7 +15,7 @@ const app = express();
 const server: Server = createServer(app);
 const io: SocketIO.Server = SocketIO(server);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 const isProd: boolean = process.env.NODE_ENV === "production";
 config.dev = !isProd;
 

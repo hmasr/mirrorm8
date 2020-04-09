@@ -1,6 +1,10 @@
 import { Configuration } from "@nuxt/types";
 
 const config: Configuration = {
+  server: {
+    host: "0.0.0.0",
+    port: 8000
+  },
   head: {
     title: "mirrorm8",
     meta: [
@@ -37,7 +41,7 @@ const config: Configuration = {
     sockets: [
       {
         name: "proximity",
-        url: "http://localhost:3000",
+        url: "http://localhost:8000",
         default: true,
         transports: ["websocket"],
         vuex: {
@@ -50,7 +54,7 @@ const config: Configuration = {
     ]
   },
   axios: {
-    baseURL: "http://localhost:3000"
+    baseURL: "http://localhost:8000"
   }
 };
 
