@@ -6,7 +6,6 @@ const mutations: MutationTree<GapiEventsState> = {
     state: GapiEventsState,
     payload: Array<gapi.client.calendar.Event>
   ) {
-    console.log(payload);
     const array: Array<GapiEvent> = [];
     try {
       for (const ev of payload) {
