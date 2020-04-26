@@ -8,32 +8,30 @@ import consola from "consola";
 import { Nuxt, Builder } from "nuxt";
 import { createServer, Server } from "http";
 import config from "../nuxt.config";
-
-dotenv.config();
-
-const app = express();
-const server: Server = createServer(app);
-const io: SocketIO.Server = SocketIO(server);
-
-const port = process.env.PORT || 8000;
-const isProd: boolean = process.env.NODE_ENV === "production";
-config.dev = !isProd;
-
-// Load api routes
 import routes from "./api";
-app.use("/api", routes);
 
-// We instantiate Nuxt.js with the options
 async function start() {
+  const app = express();
+  const server: Server = createServer(app);
+  const io: SocketIO.Server = SocketIO(server);
+
+  const port: number | string = process.env.PORT || 8000;
+  // const host: string = process.env.HOST || "127.0.0.1";
+  const isProd: boolean = process.env.NODE_ENV === "production";
+  config.dev = !isProd;
+
+  // Load api routes
+  app.use("/api", routes);
+
+  // We instantiate Nuxt.js with the options
   const nuxt = new Nuxt(config);
   await nuxt.ready();
 
   // Start build process in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt);
-    builder.build();
+    await builder.build();
   }
-
   // Load api middleware
   app.use(nuxt.render);
   app.use(bodyParser.json());
@@ -51,6 +49,4 @@ async function start() {
   SocketIoNamespaces(io);
 }
 
-if (require.main === module) {
-  start();
-}
+start();

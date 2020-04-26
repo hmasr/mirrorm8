@@ -1,9 +1,14 @@
 import { Configuration } from "@nuxt/types";
+import dotenv from "dotenv";
+
+dotenv.config();
+const port: number | string = process.env.PORT || 8000;
+const localhost: string = `http://localhost:${port}`;
 
 const config: Configuration = {
   server: {
     host: "0.0.0.0",
-    port: 8000
+    port
   },
   head: {
     title: "mirrorm8",
@@ -39,14 +44,14 @@ const config: Configuration = {
     "@nuxtjs/axios",
     "@nuxtjs/dotenv",
     "nuxt-socket-io",
-    ["@nuxtjs/proxy", { pathRewrite: { "^/api": "/api/v1" } }]
+    "@nuxtjs/proxy"
   ],
   serverMiddleware: ["~/server"],
   io: {
     sockets: [
       {
         name: "proximity",
-        url: "http://localhost:8000",
+        url: localhost,
         default: true,
         transports: ["websocket"],
         vuex: {
@@ -59,7 +64,11 @@ const config: Configuration = {
     ]
   },
   axios: {
-    baseURL: "http://localhost:8000"
+    baseURL: localhost,
+    proxy: true
+  },
+  proxy: {
+    "/api": { target: localhost, pathRewrite: { "^/api/": "/" } }
   }
 };
 
