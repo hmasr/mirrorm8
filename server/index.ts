@@ -10,13 +10,22 @@ import { createServer, Server } from "http";
 import config from "../nuxt.config";
 import routes from "./api";
 
+const app = express();
+
 async function start() {
-  const app = express();
   const server: Server = createServer(app);
   const io: SocketIO.Server = SocketIO(server);
 
-  const port: number | string = process.env.PORT || 8000;
-  // const host: string = process.env.HOST || "127.0.0.1";
+  const port: string =
+    process.env.NUXT_PORT ||
+    process.env.PORT ||
+    process.env.npm_package_config_nuxt_port ||
+    "3000";
+  const host: string =
+    process.env.NUXT_HOST ||
+    process.env.HOST ||
+    process.env.npm_package_config_nuxt_host ||
+    "localhost";
   const isProd: boolean = process.env.NODE_ENV === "production";
   config.dev = !isProd;
 
@@ -38,15 +47,17 @@ async function start() {
   app.use(helmet());
 
   server
-    .listen(port)
+    .listen(Number(port))
     .on("error", error => {
       consola.error(error);
     })
     .on("listening", () => {
-      consola.info("Server listening");
+      consola.ready("Server listening");
     });
 
   SocketIoNamespaces(io);
 }
 
 start();
+
+module.exports = app;
