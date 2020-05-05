@@ -19,6 +19,7 @@
     "types": [
       "@nuxt/types",
       "@types/node",
+      "@nuxtjs/axios",
       "@types/webpack-env",
       "@types/gapi",
       "@types/gapi.auth2",
