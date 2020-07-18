@@ -36,9 +36,7 @@
         </div>
         <i :class="forecast.icon" class="forecast-item__icon" />
         <div class="forecast-item__temp">{{ forecast.temperature.temp }}°</div>
-        <div class="forecast-item__temp-low">
-          {{ forecast.temperature.temp_min }}°
-        </div>
+        <div class="forecast-item__temp-low">{{ forecast.temperature.temp_min }}°</div>
       </div>
     </div>
   </div>
@@ -61,7 +59,7 @@ export default class TheWeather extends Vue {
 
   mounted() {
     const options = {
-      name: "veldhoven",
+      name: encodeURIComponent(process.env.CITY as string),
       countryCode: process.env.LANG
     };
     this.dayForecastbyCityName(options);
