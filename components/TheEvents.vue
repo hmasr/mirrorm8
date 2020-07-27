@@ -14,9 +14,7 @@
       </div>
       <div class="event__description">
         <div class="summary">{{ event.summary }}</div>
-        <div class="time">
-          {{ getTime(event.date.start) }} - {{ getTime(event.date.end) }}
-        </div>
+        <div class="time">{{ getTime(event.date.start) }} - {{ getTime(event.date.end) }}</div>
       </div>
     </div>
   </div>
@@ -36,9 +34,13 @@ export default class TheEvents extends Vue {
   @events.Getter eventList;
 
   async mounted() {
-    await this.$gapi.initialize();
-    await this.$gapi.authenticate();
-    this.getEvents();
+    try {
+      await this.$gapi.initialize();
+      await this.$gapi.authenticate();
+      this.getEvents();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   isSameDay(d1: Date, d2: Date): boolean {
