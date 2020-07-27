@@ -84,7 +84,7 @@ export default class Gapi implements IGapi {
             resolve();
           },
           function(reason) {
-            reject(reason.error);
+            reject(reason);
           }
         );
     });
