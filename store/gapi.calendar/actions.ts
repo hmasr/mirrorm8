@@ -29,17 +29,8 @@ const eventsMock = [
 
 const actions: ActionTree<GapiEventsState, RootState> = {
   async getEvents({ commit }) {
-    // commit("setEvents", eventsMock);
     try {
-      if (
-        !process.env.GAPI_CALENDAR_ID ||
-        !process.env.GAPI_CALENDAR_ID.length
-      ) {
-        throw new Error("Undefined environment variable 'GAPI_CALENDAR_ID'");
-      }
-      const result: GapiEvents = await this._vm.$gapi.calendar.getEvents(
-        process.env.GAPI_CALENDAR_ID
-      );
+      const result: GapiEvents = await this.$axios.$get("/api/calendar/coming");
       commit("setEvents", result);
     } catch (error) {
       console.log(error);
