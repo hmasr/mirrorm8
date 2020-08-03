@@ -32,14 +32,13 @@
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
     "start": "cross-env NODE_ENV=production ts-node --project 'server/tsconfig.json' server/index.ts",
-    "generate": "nuxt-ts generate"
+    "generate": "nuxt-ts generate",
+    "inspect": "cross-env TS_NODE_PROJECT=server/tsconfig.json node --inspect -r ts-node/register server/index.ts"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "0.6.0",
     "@nuxt/vue-app": "2.11.0",
     "@types/express-validator": "3.0.0",
-    "@types/gapi": "0.0.39",
-    "@types/gapi.auth2": "0.0.51",
     "@types/node": "10.14.4",
     "@types/socket.io": "2.1.4",
     "@types/webpack-env": "1.14.1",

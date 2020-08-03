@@ -1,4 +1,4 @@
-import { Configuration } from "@nuxt/types";
+import { Configuration } from "nuxt";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -19,12 +19,7 @@ const config: Configuration = {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   loading: { color: "#3B8070" },
-  plugins: [
-    {
-      src: "~/plugins/vue-gapi.client.ts",
-      ssr: false
-    }
-  ],
+  plugins: [],
   css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
   watch: ["~/server/**/*.ts"],
   buildModules: ["@nuxt/typescript-build"],
@@ -35,12 +30,7 @@ const config: Configuration = {
       }
     }
   },
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/dotenv",
-    "nuxt-socket-io"
-    // "@nuxtjs/proxy"
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-socket-io"],
   serverMiddleware: [{ path: "/api", handler: "~/server/index.ts" }],
   io: {
     sockets: [
@@ -57,12 +47,7 @@ const config: Configuration = {
       }
     ]
   },
-  axios: {
-    // proxy: true
-  }
-  // proxy: {
-  //   "/api": { target: localhost, pathRewrite: { "^/api/": "/" } }
-  // }
+  axios: {}
 };
 
 export default config;
