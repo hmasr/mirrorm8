@@ -35,8 +35,6 @@ export default class TheEvents extends Vue {
 
   async mounted() {
     try {
-      await this.$gapi.initialize();
-      await this.$gapi.authenticate();
       this.getEvents();
     } catch (error) {
       console.error(error);
@@ -58,20 +56,20 @@ export default class TheEvents extends Vue {
     return {
       getWeekDay: this.getWeekDay,
       getDay: this.getDay,
-      getTime: this.getTime
+      getTime: this.getTime,
     };
   }
 
   getTime(date: Date, format = "2-digit"): string {
     return date.toLocaleTimeString(process.env.LANG, {
       hour: format,
-      minute: format
+      minute: format,
     });
   }
 
   getWeekDay(date: Date, format = "short"): string {
     return this.format(date, {
-      weekday: format
+      weekday: format,
     });
   }
 
