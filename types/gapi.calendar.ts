@@ -1,3 +1,5 @@
+export type GapiEvents = gapi.client.calendar.Event[] | undefined;
+
 export interface GapiEventsState {
   events: Array<GapiEvent>;
 }
@@ -19,4 +21,8 @@ export interface GoogleEvent {
   start: {
     dateTime: string;
   };
+}
+
+export interface IGapiCalendar {
+  getEvents(calendarId: string): Promise<GapiEvents>;
 }

@@ -20,8 +20,7 @@
       "@nuxt/types",
       "@types/node",
       "@nuxtjs/axios",
-      "@types/webpack-env",
-      "./types/gapi.client.calendar"
+      "@types/webpack-env"
     ]
   },
   "exclude": ["node_modules"]
