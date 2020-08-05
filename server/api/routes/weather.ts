@@ -5,6 +5,7 @@ import {
   OpenWeatherMapApiUnits,
   IByCityNameOptions
 } from "node-ts-open-weather-map";
+import consola from "consola";
 
 const router: Router = Router();
 
@@ -43,6 +44,7 @@ router.get(
       } as IByCityNameOptions);
       return res.status(200).json(data);
     } catch (error) {
+      consola.error(error);
       return res.status(500).json(error);
     }
   }
@@ -68,6 +70,7 @@ router.get(
 
       return res.json(data);
     } catch (error) {
+      consola.error(error);
       return res.status(500).json(error);
     }
   }

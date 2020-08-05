@@ -1,5 +1,8 @@
 import { Configuration } from "nuxt";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
+import helmet from "helmet";
+
 dotenv.config();
 
 const config: Configuration = {
@@ -73,7 +76,11 @@ const config: Configuration = {
   /*
    ** Server Middleware
    */
-  serverMiddleware: { "/api": "~/server/index.ts" },
+  serverMiddleware: [
+    bodyParser.json(),
+    helmet(),
+    { path: "/api", handler: "~/server/index.ts" }
+  ],
 
   /*
    ** Nuxt.js modules

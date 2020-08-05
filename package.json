@@ -28,10 +28,10 @@
     }
   },
   "scripts": {
-    "dev": "cross-env nodemon server/index.ts",
+    "dev": "nuxt-ts",
     "build": "nuxt-ts build",
-    "start": "cross-env NODE_ENV=production ts-node --project 'server/tsconfig.json' server/index.ts",
     "generate": "nuxt-ts generate",
+    "start": "nuxt-ts start",
     "inspect": "cross-env TS_NODE_PROJECT=server/tsconfig.json node --inspect -r ts-node/register server/index.ts"
   },
   "devDependencies": {

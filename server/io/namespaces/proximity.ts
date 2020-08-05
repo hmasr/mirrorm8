@@ -2,15 +2,17 @@ import SocketIO from "socket.io";
 import { SignalProximity } from "node-pi-proximity";
 import { Gpio } from "onoff";
 import { execSync } from "child_process";
+import consola from "consola";
 
 export default (io: SocketIO.Server) => {
+  consola.info("Loading socket.io namespaces...");
   const of = io.of("/proximity");
 
   of.on("connection", (socket: SocketIO.Socket) => {
-    console.info("Socket.IO connected to /proximity");
+    consola.info("Socket.IO connected to /proximity");
 
     socket.on("disconnect", () => {
-      console.info("client disconnected from /proximity");
+      consola.info("client disconnected from /proximity");
     });
   });
 
@@ -30,22 +32,22 @@ export default (io: SocketIO.Server) => {
 
     signalProximity
       .on("begin", () => {
-        console.log("Turn display ON");
+        consola.log("Turn display ON");
         try {
           execSync("vcgencmd display_power 1");
         } catch (error) {
-          console.error(error);
+          consola.error(error);
         }
       })
       .on("change", value => {
         of.emit("change", Boolean(value));
       })
       .on("end", () => {
-        console.log("Turn display OFF");
+        consola.log("Turn display OFF");
         try {
           execSync("vcgencmd display_power 0");
         } catch (error) {
-          console.error(error);
+          consola.error(error);
         }
       });
 
