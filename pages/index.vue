@@ -34,8 +34,8 @@ import TheProximity from "~/components/TheProximity.vue";
     TheWeather,
     TheTime,
     TheEvents,
-    TheProximity
-  }
+    TheProximity,
+  },
 })
 export default class extends Vue {}
 </script>
