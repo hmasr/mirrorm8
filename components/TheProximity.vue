@@ -21,25 +21,14 @@ export default class TheProximity extends Vue {
 
   private socket: any;
 
-  // data() {
-  //   return {
-  //     socketStatus: Object
-  //   };
-  // }
-
   mounted() {
     this.socket = this.$nuxtSocket({
-      // name: "proximity",
       channel: "/proximity",
       reconnection: false
-      // statusProp: "socketStatus"
     });
     this.socket.on("connect", () => {
       console.log("WS proximity connected");
     });
-    // this.socket.on("change", ({ sender, event, payload }) => {
-    //   console.log("WS proximity");
-    // });
   }
 }
 </script>
