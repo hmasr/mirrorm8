@@ -3,8 +3,22 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const config: Configuration = {
+  /*
+   ** Nuxt rendering mode
+   ** See https://nuxtjs.org/api/configuration-mode
+   */
   mode: "universal",
-  dev: process.env.NODE_ENV !== "production",
+
+  /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
+  target: "server",
+
+  /*
+   ** Headers of the page
+   ** See https://nuxtjs.org/api/configuration-head
+   */
   head: {
     title: "mirrorm8",
     meta: [
@@ -18,11 +32,36 @@ const config: Configuration = {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
-  loading: { color: "#3B8070" },
-  plugins: [],
+  /*
+   ** Nuxt option to set development mode.
+   */
+  dev: process.env.NODE_ENV !== "production",
+
+  /*
+   ** Global CSS
+   */
   css: ["spectre.css", "~/assets/fonts/meteocons/meteocons.css"],
+
+  /*
+   ** Plugins to load before mounting the App
+   ** https://nuxtjs.org/guide/plugins
+   */
+  plugins: [],
   watch: ["~/server/**/*.ts"],
-  buildModules: ["@nuxt/typescript-build"],
+  /*
+   ** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: true,
+
+  /*
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    // "@nuxtjs/eslint-module",
+    "@nuxt/typescript-build"
+  ],
   build: {
     extend(config: any, ctx: any) {
       if (ctx.isDev) {
@@ -30,8 +69,20 @@ const config: Configuration = {
       }
     }
   },
+
+  /*
+   ** Server Middleware
+   */
+  serverMiddleware: { "/api": "~/server/index.ts" },
+
+  /*
+   ** Nuxt.js modules
+   */
   modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-socket-io"],
-  serverMiddleware: [{ path: "/api", handler: "~/server/index.ts" }],
+
+  /*
+   ** Nuxt.js modules Options
+   */
   io: {
     sockets: [
       {
