@@ -1,7 +1,7 @@
 <template>
   <div class="the-time">
-    <div class="date">{{date}}</div>
-    <div class="time">{{time}}</div>
+    <div class="date">{{ date }}</div>
+    <div class="time">{{ time }}</div>
   </div>
 </template>
 
@@ -17,7 +17,8 @@ export default class TheTime extends Vue {
 
   mounted() {
     this.$_update();
-    this.interval = setInterval(this.$_update, 10000);
+    // Update every 10 seconds.
+    this.interval = setInterval(this.$_update, 1000 * 10);
   }
 
   destroy() {
@@ -34,7 +35,7 @@ export default class TheTime extends Vue {
       weekday: "long",
       year: "numeric",
       month: "short",
-      day: "2-digit"
+      day: "2-digit",
     };
     const date = new Date();
     return date.toLocaleDateString(process.env.LANG, options);
@@ -44,7 +45,7 @@ export default class TheTime extends Vue {
     const options: Intl.DateTimeFormatOptions = {
       hour: "2-digit",
       minute: "2-digit",
-      hour12: false
+      hour12: false,
     };
     const date = new Date();
     return date.toLocaleDateString(process.env.LANG, options).split(" ")[1];
@@ -63,4 +64,3 @@ export default class TheTime extends Vue {
   }
 }
 </style>
-
