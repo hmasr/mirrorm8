@@ -24,11 +24,10 @@ export default (io: SocketIO.Server) => {
     }, 1000);
   } else {
     const gpio4 = new Gpio(4, "in", "both");
+    const timeout = process.env.SIGNAL_TIMEOUT || 60;
+    const timeoutMs = timeout * 1000;
 
-    const signalProximity = new SignalProximity(
-      gpio4,
-      process.env.SIGNAL_TIMEOUT as number | undefined
-    );
+    const signalProximity = new SignalProximity(gpio4, timeoutMs);
 
     signalProximity
       .on("begin", () => {
