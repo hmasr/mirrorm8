@@ -5,7 +5,7 @@
         <div
           v-if="
             key == 0 ||
-              !isSameDay(event.date.start, eventList[key - 1].date.start)
+            !isSameDay(event.date.start, eventList[key - 1].date.start)
           "
         >
           <div class="day-name">{{ getWeekDay(event.date.start) }}</div>
@@ -14,7 +14,9 @@
       </div>
       <div class="event__description">
         <div class="summary">{{ event.summary }}</div>
-        <div class="time">{{ getTime(event.date.start) }} - {{ getTime(event.date.end) }}</div>
+        <div class="time">
+          {{ getTime(event.date.start) }} - {{ getTime(event.date.end) }}
+        </div>
       </div>
     </div>
   </div>
@@ -33,7 +35,19 @@ export default class TheEvents extends Vue {
   @events.Action getEvents;
   @events.Getter eventList;
 
-  async mounted() {
+  private interval!: NodeJS.Timer;
+
+  mounted() {
+    this.$_update();
+    // Update every 12 hours.
+    this.interval = setInterval(this.$_update, 60 * 60 * 12 * 1000);
+  }
+
+  destroy() {
+    clearTimeout(this.interval);
+  }
+
+  private $_update() {
     try {
       this.getEvents();
     } catch (error) {
