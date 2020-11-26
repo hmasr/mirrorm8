@@ -19,9 +19,6 @@
             {{ dayForecast.wind.speed }}km/h
           </div>
         </div>
-        <!-- <div class="column col-6 day-forecast__details">
-          <div class="day-forecast__humidity">Vochtigheid: {{dayForecast.temperature.humidity}}%</div>
-        </div>-->
       </div>
     </div>
 
@@ -36,7 +33,9 @@
         </div>
         <i :class="forecast.icon" class="forecast-item__icon" />
         <div class="forecast-item__temp">{{ forecast.temperature.temp }}°</div>
-        <div class="forecast-item__temp-low">{{ forecast.temperature.temp_min }}°</div>
+        <div class="forecast-item__temp-low">
+          {{ forecast.temperature.temp_min }}°
+        </div>
       </div>
     </div>
   </div>
@@ -57,10 +56,22 @@ export default class TheWeather extends Vue {
   @weather.Getter dayForecast!: DayForecast;
   @weather.Getter weeklyForecast!: WeeklyForecast;
 
+  private interval!: NodeJS.Timer;
+
   mounted() {
+    this.$_update();
+    // Update hourly.
+    this.interval = setInterval(this.$_update, 60 * 60 * 1000);
+  }
+
+  destroy() {
+    clearTimeout(this.interval);
+  }
+
+  private $_update() {
     const options = {
       name: encodeURIComponent(process.env.CITY as string),
-      countryCode: process.env.LANG
+      countryCode: process.env.LANG,
     };
     this.dayForecastbyCityName(options);
     this.weeklyForecastByCityName(options);
