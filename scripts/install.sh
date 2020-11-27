@@ -35,4 +35,15 @@ chmod +x $SERVICE_SCRIPT_PATH
 echo "Enabling systemd service"
 systemctl enable mirrorm8.service
 
+sed -i 's/xinit $FP_CHROMIUM $CHROMIUM_OPTS//' /var/lib/dietpi/dietpi-autostart/chromium-autostart.sh
+
+cat << EOF >> /var/lib/dietpi/dietpi-autostart/chromium-autostart.sh
+# Fix to disable chromium "Restore Bubble" popup
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/Default/Preferences
+sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
+
+xinit \$FP_CHROMIUM \$CHROMIUM_OPTS
+
+EOF
+
 echo "Done..."
