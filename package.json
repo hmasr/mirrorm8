@@ -2,7 +2,6 @@
   "name": "mirrorm8",
   "description": "Smart Mirror project",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "@nuxt/typescript-runtime": "latest",
     "@nuxtjs/axios": "~5.12.0",
