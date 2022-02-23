@@ -1,17 +1,9 @@
 import { Configuration } from "nuxt";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
-import helmet from "helmet";
 
 dotenv.config();
 
 const config: Configuration = {
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: "universal",
-
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -30,10 +22,10 @@ const config: Configuration = {
       {
         hid: "description",
         name: "description",
-        content: "Smart Mirror project"
-      }
+        content: "Smart Mirror project",
+      },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   /*
    ** Nuxt option to set development mode.
@@ -57,35 +49,31 @@ const config: Configuration = {
    */
   components: true,
 
+  compilerOptions: {
+    types: ["@nuxt/types", "@nuxtjs/axios"],
+  },
+
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    // "@nuxtjs/eslint-module",
-    "@nuxt/typescript-build"
-  ],
+  buildModules: ["@nuxt/typescript-build"],
   build: {
     extend(config: any, ctx: any) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? "source-map" : "inline-source-map";
       }
-    }
+    },
   },
 
   /*
    ** Server Middleware
    */
-  serverMiddleware: [
-    bodyParser.json(),
-    helmet(),
-    { path: "/api", handler: "~/server/index.ts" }
-  ],
+  serverMiddleware: [{ path: "/api", handler: "~/server/index.ts" }],
 
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-socket-io"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/dotenv", "nuxt-helmet", "nuxt-socket-io"],
 
   /*
    ** Nuxt.js modules Options
@@ -94,18 +82,20 @@ const config: Configuration = {
     sockets: [
       {
         name: "proximity",
+        url: "http://localhost:8000",
+
         default: true,
         transports: ["websocket"],
         vuex: {
-          mutations: [{ change: "proximity/setIsSignalEnabled" }]
+          mutations: [{ change: "proximity/setIsSignalEnabled" }],
         },
         namespaces: {
-          "/proximity": {}
-        }
-      }
-    ]
+          "/proximity": {},
+        },
+      },
+    ],
   },
-  axios: {}
+  axios: {},
 };
 
 export default config;

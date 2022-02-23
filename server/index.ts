@@ -5,6 +5,7 @@ import consola from "consola";
 import { createServer, Server } from "http";
 
 const app = express();
+app.use(express.json());
 
 // Import Nuxt.js options\
 import dotenv from "dotenv";
