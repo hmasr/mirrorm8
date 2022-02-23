@@ -2,9 +2,11 @@
 
 > Smart Mirror project
 
+https://ovaar.github.io/blog/how-a-smart-mirror-project-finished-after-years/
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install # Or yarn install
 
